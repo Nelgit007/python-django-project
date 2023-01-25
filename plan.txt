@@ -1,0 +1,231 @@
+-Beginning a django project we write what we intend to implement or a spec
+-The set up a virtual env to build project
+
+Step 1 & 2;
+-Create  a new dir "Learning_log"
+-Create inside the learning_log dir, a new dev vrtual env
+-
+########
+python3 -m venv llog_env
+########
+
+Step 3;
+Activate the new virtual env
+#######
+source llog_env/bin/activate
+######
+
+Step 4;
+We can now install packages to the env, and can use alreadly installed packeges.
+NB: Packegs installed in a virtua env are inluy available when we are inide that env so tey domnt alter anything outside tte env. Or comlplications to oher app we might vwork on.
+
+Exit from Dev_env
+########
+deactivate
+########
+
+Step 5:
+Install django and create new project
+#########
+pip install django
+#####
+
+To create new project;
+#######
+django-admin startproject learning_log .
+########
+
+NB:Within the dev env you have files like the learing_log, within you find;
+
+-urls.py: for configuring urls, the files tells django which pages to build in response to users request.
+
+-settings.py for setings on how django file interacts with our system and manges our project. 
+
+-wsgi.py (web server gateway interface) helps django d=serve the files it creates.
+
+Step 6
+-Create a Database
+######
+python manage.py migrate
+#####
+Using db.sqlite3 for this project.
+
+Step 7
+-Check to confirm project is properly set-up and running.
+######
+python3 manage.py runserver
+######
+NB: If port 8000 is in use, you can specify the port.
+---python3 manage.py runserver 8005
+
+A django project works like a group of individual apps. We get one app to do particular taks or function.
+
+Step 8:
+Open a new terminal and naviate to your dev env folder, 
+-reactivate venv for new window.
+#####
+source llog_env/bin/activate
+#####
+
+- Create a NEW APP
+To create a new app;
+########
+python manage.py startapp learing_logs
+##############
+-- Build your app
+
+Navigate into your new app folder and find important files like;
+-models.py
+-admin.yu
+-views.py
+
+Step 9;
+- Edit the models.py to change the data model of your app to aling to what ou are buildong.
+- Create a new class Topic(models.Model).
+- Add your new ap to django setting.py so it can run
+- Create migrations to database
+######
+python3 manage.py makemigrations learning_logs
+######
+
+- Apply new changes to database
+######
+python3 manage.py migrate
+######
+
+IN django you can have different users with diff  access levels. 
+
+Step 10;
+Create a Super User.
+#######
+python3 manage.py createsuperuser
+######
+
+####
+llog_admin
+#####
+
+###
+email-optonal
+###
+
+###
+password-admin
+####
+
+NB: Encrypting some info a way from superusers
+-Modiyfy admin.py file in your apllication folder.
+-Ensure to ref your model file inside your admin by ".models"
+(. -- current dir)
+
+-FOR USERS TO RECALL WHAT THEY HAVE BEEN LEARNING.
+-We have to define a module for the kind of learing users can make in their learning logs.
+-Each entry must be associated with particular topic ( A many to one relationship)
+
+- Modify modeul by adding an Entry class.
+
+- For every time you modify model ensure to migrate database.
+
+- Import the new Entry class into admin.py and register the class as well.
+
+Step 11;
+Examine the data using django interractive terminal or django shell. Test and trouble shoot. 
+
+--Start a shell session
+####
+python3 manage.py shell
+#####
+
+Inspect the various topics related:
+######
+>> from learning_logs.models import Topic
+>> Topic.objects.all()
+######
+
+--LOop over Topic query set and get single atributes fomr the topic
+#####
+-topic = Topic.objects.all()
+-for topic in topics:
+	print(topic.id, topic)
+NB: The topic id allows us to know each object and can assign a valuw to particular object.
+####
+r = Topic.objects.all(id=1)
+calling r text would men calling the class name.
+r.text
+r.date_added
+#######
+
+---Looking at Entries relating to each topic
+##########
+r.entry_set.all()
+
+STEP 12;
+MAKING WEB PAGES.
+
+making web pages with django consust of three(3) stages.
+-define/ map urls
+-write views
+-write templates
+
+Home page -- define url, write view function and create a simple tempnate for dipplay.
+first - import an include path.
+This would be used to display learnign log
+secondly, create a new file inside of learning_logs (ie your application folder) for urls.py
+NB: The url pattern is a list of pages that can be accessed in the learning_log app.
+
+'' - Allows django route request properly
+
+Thirdly - write a view function' 
+
+NEXT:
+Build two pages that dsplays data.
+-Page that List all topis
+-Page thatvshows all entries for particular topucs
+- Each page will specify a url patter, wrte a view function and a template.
+Thus create a base template where all templates can inherit from.
+####
+base.html
+####
+The base.html will contain
+-The first paragraph contains project name with home page link.
+
+Next: Re-write index.html file to inherit from nase.html
+-extent the base.html to the index.html
+
+Next:
+-add the url for topic page in urls.py
+-In views.py import ypur topic calss and define function for topic.
+-Create a database asking for Topic.objects.order_by(date_added)
+- Ensure you create a file topics.html
+
+Next:
+Modify base template to include link to topics page.
+django auto generates alink from the instructuon in base.html.
+
+
+CREATA A PAGE FOCUSING ON A SINGLE TOPIC WITH NAME AND ENTRRIES
+- update urls.py
+- Identfy the topic with an int that wil be matched with the topic_id as before, we ref the views.py which will be access theouhgh the name topic with our django app.
+-Heading to views we create topic
+NB: this new topic function will require an additinal parameter aside form the request.
+- add a temlate filter to the data being collected.
+
+- since we have to link to diif topics available and modify topics.html
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,37 @@
+PROJECT DESCRIPTION;
+To create a learning log apllication.
+
+-Beginning a django project we write what we intend to implement or a spec
+-The set up a virtual env to build project
+
+-Beginning a django project we write what we intend to implement or a spec,
+Thus is meant to guide us during dev
+-The set up a virtual env to build project
+
+Spec (simplified):
+
+A web app called "Learning Log";
+- This app allows users to log topics of interest / while making journal entries
+
+Learnig Log Home page;
+- Describes site and invites users to register or login
+
+Learing log "When users Log in";
+- Users can:
+	- Create new topics
+	- Add new entries
+	- Read/edit existing entries
+	- Delete entries
+
+Step 5;
+Thinking about the data in the learning log.
+- Each user creates topics in learning log
+- Each entry tied to a topic and dislayed as text
+- Store the time stamp to display time of entry
+
+Step 5;
+Edit the models.py to chaneg the data model of your app.
+
+
+
+
